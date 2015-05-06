@@ -1,0 +1,2 @@
+Construir um programa que seleciona todos os separadores de um texto entrada. Um separador é qualquer caracter que não seja
+letra. O arquivo deverá ser salvo como separadores.txt

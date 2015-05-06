@@ -1,0 +1,5 @@
+As propriedades de áudio, como a qualidade do som, frequência, taxa de bits e canal de áudio já são definidas para que você possa produzir os arquivos de áudio ideais.  No entanto, você pode alterar essas configurações, dependendo de sua necessidade.  Ao converter seu documento em formato MP3, você tem a opção de adicionar música de fundo ao arquivo de áudio para uma agradável experiência de escuta.  Habilite a opção Adicionar música de fundo para o arquivo de saída.  Com o Teste Botão que você pode escutar como soa seu arquivo de áudio.  Você pode ajustar o volume da música de fundo com a ajuda do controle deslizante.
+
+Se você deseja converter uma parte do seu documento de texto em áudio, em seguida, selecione as seções importantes.  Isso pode ser útil se você quiser ouvir apenas os pontos-chave do seu documento.  Quando você tem todas as seções importantes no texto selecionado e clique em Editar >> área de estrutura de tópicos.  Converter o texto marcado para arquivo de áudio MP3, clicando em Falar >> Converter delineadas texto.
+
+AUSHASuASHASUASH
