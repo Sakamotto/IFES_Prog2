@@ -274,7 +274,7 @@ def ehRomano(pTexto):
 #
 
 def codifica(pTexto):
-	preposicoes = ['a', 'ante', 'até', 'após', 'com', 'contra','de','do', 'desde','em','entre','para','per',
+	preposicoes = ['a', 'ante', 'após', 'com', 'contra','de','do', 'desde','em','entre','para','per',
 	'perante','por','sem','sob','sobre','trás']
 	conjuncoes = ['e', 'nem', 'mas também', 'como também', 'bem como', 'mas ainda','mas', 'porém', 'todavia', 'contudo', 'antes']
 	artigos = ['o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas']
@@ -300,6 +300,22 @@ def codifica(pTexto):
 	return strCodificada
 #
 
+def ordenaVetPorTamanho(lista):
+	trocas = False
+	
+	while not trocas:
+		trocas = True
+		for i in range(len(lista) - 1):
+			if len(lista[i]) < len(lista[i + 1]):
+				aux = lista[i]
+				lista[i] = lista[i+1]
+				lista[i+1] = aux
+				trocas = False
+			#
+		#
+	#
+#
+
 def extraiPadrao(lstTokens, lstPadroes):
 	tokensCodificados = codifica(lstTokens)
 	newArray = []
@@ -308,16 +324,15 @@ def extraiPadrao(lstTokens, lstPadroes):
 	ordenaVetPorTamanho(lstPadroes)
 	
 	for i in range(len(lstPadroes)):
-		pos = tokensCodificados.find(lstPadroes[i])
+		pos = newStr.find(lstPadroes[i])
 		while pos != -1:
-			newStr = newStr.replace(lstPadroes[i], "*"*len(lstPadroes[i]), 1)
+			newStr = newStr.replace(lstPadroes[i], "*" * len(lstPadroes[i]), 1)
 			for j in range(pos, pos + len(lstPadroes[i])):
 				strPalavra = strPalavra + lstTokens[j] + " "
 			#
 			newArray.append(strPalavra)
 			strPalavra = ""
 			pos = newStr.find(lstPadroes[i])
-			newStr = newStr.replace(lstPadroes[i], "*" * len(lstPadroes[i]), 1)
 		#
 	#
 	return newArray
