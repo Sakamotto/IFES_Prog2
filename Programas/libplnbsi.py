@@ -23,19 +23,18 @@ def nGrama(pTexto, tam):
 #
 
 def insereEspacos(pTexto):
-	strSeparadores = " .,:;!?(){}[]/\\"
 	textoNovo = ""
+	i = 0
 	
-	for elem in pTexto:
-		if elem in strSeparadores:
-			if elem != "":
-				textoNovo += " " + elem + " "
-			else:
-				textoNovo += elem
-			#
+	while i < len(pTexto):
+		if pTexto[i].isdigit() and (i + 1) < len(pTexto) and pTexto[i+1].isalpha():
+			textoNovo += pTexto[i] + " "
+		elif pTexto[i].isalnum():
+			textoNovo += pTexto[i]
 		else:
-			textoNovo += elem
+			textoNovo += " " + pTexto[i] + " "
 		#
+		i += 1
 	#
 	return textoNovo
 #
@@ -44,8 +43,33 @@ def tokenizador(txt):
 	lstTokens = []
 	strbuffer = ''
 	lstposicoes = []
-	pos = 0
-	separador = ' ,!?.:;/-_\\()[]{}'
+	pos = 0	
+	separador = selecionaSeparadores(txt)
+	
+	for pos in range(len(txt)):
+		if txt[pos] not in separador:
+			strbuffer += txt[pos]
+		else:
+			if strbuffer != '':
+				lstTokens.append(strbuffer)
+				lstposicoes.append(pos-len(strbuffer))
+				strbuffer = ''
+			if txt[pos] not in [' ','\t']:
+				lstTokens.append(txt[pos])
+				lstposicoes.append(pos)
+	if strbuffer != '':
+		lstTokens.append(strbuffer)
+		lstposicoes.append(pos-len(strbuffer))
+	
+	return lstTokens, lstposicoes
+#
+
+def tokenizadorv2(txt, separador):
+	lstTokens = []
+	strbuffer = ''
+	lstposicoes = []
+	pos = 0	
+	#separador = selecionaSeparadores(txt)
 	
 	for pos in range(len(txt)):
 		if txt[pos] not in separador:
@@ -66,7 +90,7 @@ def tokenizador(txt):
 #
 	
 def separaPal(pTexto):
-	strSeparadores = ' ,!?.:;/-_\\()[]{}'
+	strSeparadores = ' ,!?.:;/-_\\()[]{}><\n\t'
 	strBuffer = ""
 	lstPalavras = []
 	
@@ -273,11 +297,15 @@ def ehRomano(pTexto):
 	return True
 #
 
+#Codifica recebe um texto tokenizado
 def codifica(pTexto):
 	preposicoes = ['a', 'ante', 'após', 'com', 'contra','de','do', 'desde','em','entre','para','per',
 	'perante','por','sem','sob','sobre','trás']
 	conjuncoes = ['e', 'nem', 'mas também', 'como também', 'bem como', 'mas ainda','mas', 'porém', 'todavia', 'contudo', 'antes']
 	artigos = ['o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas']
+	
+	pTratamentos = ['V. A.','V. Ema.','V. Emas.','V. Revma.','V. Ex.ª','V. Mag.ª','V. M.','V. M. I.','V. S.','V. S.ª','V. O.']
+	
 	strCodificada = ""
 	
 	for elem in pTexto:
@@ -294,6 +322,8 @@ def codifica(pTexto):
 				strCodificada += 'm'
 		elif elem.isdigit():
 			strCodificada += 'N'
+		elif elem.isalnum():
+			strCodificada += "AL"
 		else:
 			strCodificada += elem
 		#
@@ -322,6 +352,7 @@ def extraiPadrao(lstTokens, lstPadroes):
 	newStr = tokensCodificados
 	strPalavra = ""
 	ordenaVetPorTamanho(lstPadroes)
+	print("\n\n", tokensCodificados, "\n\n")
 	
 	for i in range(len(lstPadroes)):
 		pos = newStr.find(lstPadroes[i])
@@ -335,30 +366,41 @@ def extraiPadrao(lstTokens, lstPadroes):
 			pos = newStr.find(lstPadroes[i])
 		#
 	#
+		
 	return newArray
 #
 
 # Dado um arquivo de texto, esta função escreve em um arquivo todos os separadores ... 
-def selecionaSeparadores(nomeArquivo):
-	arquivo = open(nomeArquivo,'r')
-	lstSeparadores = []
-	
-	linha = arquivo.readline()
-	while linha != '':
-		for texto in linha:
-			if not texto.isalpha() and not texto.isdigit():
-				if texto not in lstSeparadores:
-					lstSeparadores.append(texto)
-				#s
-			#
+def selecionaSeparadores(pTexto):
+	arquivo = open("separadores.txt",'w')
+	strSeparadores = ""
+	strSeparadores2 = ""
+
+	for texto in pTexto:
+		if not texto.isalnum() and texto not in strSeparadores:
+			strSeparadores += texto + "\n"
+			strSeparadores2 += texto
+			
 		#
-		linha = arquivo.readline()
 	#
-	separadores = open('separadores.txt', 'w')
-	separadores.write(str(lstSeparadores))
 	
-	separadores.close()
+	arquivo.write(strSeparadores)
+	
 	arquivo.close()
-	return lstSeparadores
+	
+	return strSeparadores2
 #
 
+def selecionaSeparadoresv2(pTexto):
+	strSeparadores = ""
+	
+	for texto in pTexto:
+		if not texto.isalpha() and not texto.isdigit():
+			if texto not in lstSeparadores:
+				lstSeparadores.append(texto)
+			#
+		#
+	#
+	
+	return strSeparadores
+#

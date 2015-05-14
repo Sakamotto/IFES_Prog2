@@ -28,7 +28,7 @@ def extraiPadrao(lstTokens, lstPadroes):
 	newStr = tokensCodificados
 	strPalavra = ""
 	ordenaVetPorTamanho(lstPadroes)
-	print(lstPadroes, "\n")
+	print(lstTokens, "\n")
 	
 	for i in range(len(lstPadroes)):
 		pos = newStr.find(lstPadroes[i])
@@ -40,18 +40,18 @@ def extraiPadrao(lstTokens, lstPadroes):
 			newArray.append(strPalavra)
 			strPalavra = ""
 			pos = newStr.find(lstPadroes[i])
-			#newStr = newStr.replace(lstPadroes[i], "*" * len(lstPadroes[i]), 1)
-			#print(newStr)
 		#
 	#
+		
 	return newArray
 #
 
 def main():
 	
-	padroes = ["MpM", "N/N/N", "MM","MMMM", "M"]
-	texto = "O Tribunal Administrativo Regional (TAR) do Lacio, na Itália, suspendeu nesta quarta-feira (06/05/2015) a extradição do ex-diretor do Banco do Brasil Henrique Pizzolato, condenado no processo do mensalão do PT. A Corte italiana agendou uma audiência para o dia 3 de junho para analisar o recurso protocolado pela defesa do ex-dirigente do banco público."
+	padroes = ["MpM", "N/N/N", "MM","MMMM", "M", "MpMMpM","MMpMM", "MMpM","MMM","m"]
+	texto = "Converter o texto marcado para arquivo de áudio, clicando em Falar >> Converter delineadas texto. O Tribunal Administrativo Regional >> (TAR) do - Lacio, na Itália, suspendeu nesta > quarta-feira (06/05/2015) a extradição do ex-diretor do Banco do Brasil Henrique Pizzolato, condenado no processo do mensalão do PT. A Corte italiana agendou uma audiência para o dia 3 de junho para analisar o recurso protocolado pela defesa do ex-dirigente do banco público. A República Federativa do Brasil, formada pela união indissolúvel dos Estados e Municípios e do Distrito Federal, constitui-se em Estado democrático"
 	tokens, pos = libplnbsi.tokenizador(texto)
+	print(tokens)
 	print("Texto a ser extraido: \n")
 	print(texto, "\n")
 	#print(libplnbsi.codifica(tokens))
