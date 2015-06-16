@@ -21,12 +21,11 @@ def insereEspacos(pTexto):
 	return textoNovo
 #
 
-
 def main():
 	
 	texto = "Oi, eu sou Goku! 2o"
 	
-	print(libplnbsi.separaPal(texto))
+	print(libplnbsi.insereEspacos(texto))
 	
 	return 0
 

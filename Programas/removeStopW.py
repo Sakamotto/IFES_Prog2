@@ -8,16 +8,21 @@
 """
 Construir a função removeStopW(<texto>,<lista de stopwords>). A função devolve um a texto sem stopwords.
 """
+import libplnbsi
 
 def removeStopW(pTexto, listaStopWords):
 	
-	resultado = ""
+	resultado = []
+	if type(pTexto) != "list":
+		texto = libplnbsi.separaPal(pTexto)
+	#
+	if type(listaStopWords) != "list":
+		stopWords = libplnbsi.separaPal(listaStopWords)
+	#
 	
-	for palavra in pTexto:
-		if palavra not in listaStopWords:
-			resultado += palavra
-			#print(resultado)
-		#
+	for palavra in texto:
+		if palavra not in stopWords:
+			resultado.append(palavra + " ")
 	#
 	return resultado
 #
@@ -34,6 +39,9 @@ def main():
 	
 	texto.close()
 	stopWords.close()
+	
+	#~ a = "a"
+	#~ print(type(a))
 	
 	return 0
 

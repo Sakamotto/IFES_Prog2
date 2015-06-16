@@ -304,6 +304,7 @@ def codifica(pTexto):
 	conjuncoes = ['e', 'nem', 'mas também', 'como também', 'bem como', 'mas ainda','mas', 'porém', 'todavia', 'contudo', 'antes']
 	artigos = ['o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas']
 	
+	mpTratamentos = ['Sr', 'Sra', 'Srta', 'Srs', 'Sras', 'Srª', 'Srº', 'Srªs','Ema','Emª','Drº','Drª', 'Dr']
 	pTratamentos = ['V. A.','V. Ema.','V. Emas.','V. Revma.','V. Ex.ª','V. Mag.ª','V. M.','V. M. I.','V. S.','V. S.ª','V. O.']
 	
 	strCodificada = ""
@@ -316,6 +317,12 @@ def codifica(pTexto):
 				strCodificada += 'a'
 			elif elem.lower() in conjuncoes:
 				strCodificada += 'c'
+			# Inicio Teste
+			elif elem == 'V':
+				strCodificada += 'V'
+			elif elem in mpTratamentos:
+				strCodificada += 'T'
+			# Fim Teste
 			elif elem[0].isupper():
 				strCodificada += 'M'
 			elif elem.islower:
@@ -323,7 +330,7 @@ def codifica(pTexto):
 		elif elem.isdigit():
 			strCodificada += 'N'
 		elif elem.isalnum():
-			strCodificada += "AL"
+			strCodificada += "A"
 		else:
 			strCodificada += elem
 		#
@@ -352,14 +359,22 @@ def extraiPadrao(lstTokens, lstPadroes):
 	newStr = tokensCodificados
 	strPalavra = ""
 	ordenaVetPorTamanho(lstPadroes)
-	print("\n\n", tokensCodificados, "\n\n")
+	#print("\n\n", tokensCodificados, "\n\n")
 	
 	for i in range(len(lstPadroes)):
 		pos = newStr.find(lstPadroes[i])
 		while pos != -1:
 			newStr = newStr.replace(lstPadroes[i], "*" * len(lstPadroes[i]), 1)
+			#print(newStr)
 			for j in range(pos, pos + len(lstPadroes[i])):
-				strPalavra = strPalavra + lstTokens[j] + " "
+				#print(pos)
+				#strPalavra = strPalavra + lstTokens[j] + " "
+				if lstTokens[j].isalpha():
+					strPalavra = strPalavra + lstTokens[j] + " "
+				else:
+					strPalavra = strPalavra[:len(strPalavra) - 1]
+					strPalavra = strPalavra + lstTokens[j] + " "
+				#
 			#
 			newArray.append(strPalavra)
 			strPalavra = ""
@@ -403,4 +418,21 @@ def selecionaSeparadoresv2(pTexto):
 	#
 	
 	return strSeparadores
+#
+
+def removeStopW(pTexto, listaStopWords):
+	
+	resultado = []
+	if type(pTexto) != "list":
+		texto = separaPal(pTexto)
+	#
+	if type(listaStopWords) != "list":
+		stopWords = separaPal(listaStopWords)
+	#
+	
+	for palavra in texto:
+		if palavra not in stopWords:
+			resultado.append(palavra + "\n")
+	#
+	return resultado
 #

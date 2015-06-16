@@ -1,5 +1,8 @@
 a
 à
+À
+Abadia
+abadia
 abaixo
 aca
 acaso
@@ -54,6 +57,8 @@ aqui
 aquilo
 área
 as
+às
+Às
 às
 assim
 ate

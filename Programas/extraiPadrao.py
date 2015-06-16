@@ -28,14 +28,19 @@ def extraiPadrao(lstTokens, lstPadroes):
 	newStr = tokensCodificados
 	strPalavra = ""
 	ordenaVetPorTamanho(lstPadroes)
-	print(lstTokens, "\n")
+	#print(lstTokens, "\n")
 	
 	for i in range(len(lstPadroes)):
 		pos = newStr.find(lstPadroes[i])
 		while pos != -1:
 			newStr = newStr.replace(lstPadroes[i], "*" * len(lstPadroes[i]), 1)
 			for j in range(pos, pos + len(lstPadroes[i])):
-				strPalavra = strPalavra + lstTokens[j] + " "
+				print(lstTokens[j])
+				if lstTokens[j].isalpha():
+					strPalavra = strPalavra + lstTokens[j] + " "
+				else:
+					strPalavra = strPalavra + lstTokens[j]
+				#
 			#
 			newArray.append(strPalavra)
 			strPalavra = ""
