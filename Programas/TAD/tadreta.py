@@ -5,6 +5,8 @@
 
 import tadponto
 
+# TAD RETA RETORNA UMA TUPLA COM O PONTO A E O PONTO B. LEMBRANDO QUE UM PONTO É UMA LISTA COM X E Y.
+
 # Contrutor
 def criar(ponto_a, ponto_b):
 	return (ponto_a, ponto_b)
@@ -28,6 +30,10 @@ def ehParalela(reta1, reta2):
 	return False
 #
 
+def coeficiente_angular(reta):
+	return (reta[1][1] - reta[0][1]) / (reta[1][0] - reta[0][1])
+#
+
 
 def main():
 	ptxa = float(input("X: "))
@@ -41,6 +47,7 @@ def main():
 	
 	reta = criar(ponto_a, ponto_b)
 	
+	print("Reta: ", reta)
 	reta = destroi()
 	
 	
